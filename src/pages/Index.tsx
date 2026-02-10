@@ -38,12 +38,20 @@ const Index = () => {
   }, [connected, view]);
 
   return (
-    <main className="min-h-screen bg-[#FFFFFF] text-[#0F172A] font-sans selection:bg-emerald-100">
-      {/* Navbar Tetap (Always Visible) */}
-      <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-50 px-6 md:px-12 py-4 flex justify-between items-center">
+    <main className="min-h-screen bg-white text-slate-900 font-sans selection:bg-emerald-100">
+      {/* Background Decor */}
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-50/20 via-transparent to-transparent pointer-events-none" />
+
+      {/* Luxury Navbar */}
+      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 px-6 md:px-12 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => setView('menu')}>
-          <img src={LOGO_URL} alt="RTC" className="w-8 h-8 object-contain" />
-          <span className="font-serif tracking-[0.2em] uppercase text-sm font-bold">Rothschild</span>
+          <img 
+            src={LOGO_URL} 
+            alt="RTC" 
+            className="w-10 h-10 object-contain drop-shadow-sm"
+            onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/150?text=RTC"; }} 
+          />
+          <span className="font-serif tracking-[0.2em] uppercase text-sm font-black text-slate-900">Rothschild</span>
         </div>
         <div className="flex items-center gap-4">
           {connected && (
@@ -53,59 +61,75 @@ const Index = () => {
               </span>
             </div>
           )}
-          <WalletMultiButton className="!bg-slate-900 !rounded-full !text-[9px] !uppercase !tracking-widest !h-10 transition-all shadow-lg shadow-slate-200" />
+          <WalletMultiButton className="!bg-slate-900 !rounded-full !text-[9px] !uppercase !tracking-widest !h-10 shadow-lg" />
         </div>
       </nav>
 
       <AnimatePresence mode="wait">
         {view === 'landing' && (
           <motion.section key="landing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="h-screen flex flex-col items-center justify-center text-center px-6">
-            <img src={LOGO_URL} alt="Rothschild Logo" className="w-40 h-40 mb-10 drop-shadow-2xl" />
-            <h1 className="text-6xl md:text-8xl font-light tracking-[0.3em] uppercase italic">Rothschild</h1>
-            <p className="text-[10px] tracking-[0.6em] uppercase text-emerald-600 font-bold mt-6 opacity-80">Private Wealth Infrastructure</p>
+            <div className="mb-10">
+              <img 
+                src={LOGO_URL} 
+                alt="Logo" 
+                className="w-48 h-48 mx-auto drop-shadow-2xl"
+                onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/200?text=Rothschild+Capital"; }}
+              />
+            </div>
+            <h1 className="text-6xl md:text-8xl font-black tracking-[0.2em] uppercase text-slate-900">
+              ROTHSCHILD
+            </h1>
+            <h2 className="text-4xl md:text-6xl font-light tracking-[0.1em] uppercase text-emerald-600 mt-2">
+              CAPITAL
+            </h2>
+            <p className="text-[11px] tracking-[0.5em] uppercase text-slate-500 font-bold mt-8">
+              Sovereign Wealth Infrastructure
+            </p>
             <div className="mt-16">
-               <WalletMultiButton className="!bg-emerald-600 !px-12 !py-6 !rounded-full !text-[11px] !uppercase !tracking-[0.3em] shadow-2xl shadow-emerald-200" />
+               <WalletMultiButton className="!bg-emerald-600 !px-16 !py-8 !rounded-full !text-[11px] !uppercase !tracking-[0.4em] shadow-2xl shadow-emerald-100 hover:scale-105 transition-transform" />
             </div>
           </motion.section>
         )}
 
         {view === 'menu' && (
-          <motion.section key="menu" className="min-h-screen flex flex-col items-center justify-center p-6 pt-32">
+          <motion.section key="menu" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="min-h-screen flex flex-col items-center justify-center p-6 pt-32">
             <div className="grid md:grid-cols-3 gap-8 w-full max-w-6xl">
-              <MenuCard title="Equity Presale" desc="Direct Investment Terminal" onClick={() => setView('presale')} />
-              <MenuCard title="Exchange" desc="Liquidity Access Point" onClick={() => setView('dex')} />
-              <MenuCard title="Dividends" desc="Asset Performance Yield" onClick={() => setView('dividend')} />
+              <MenuCard title="Equity Presale" desc="Direct Asset Contribution" onClick={() => setView('presale')} />
+              <MenuCard title="DEX Exchange" desc="Secondary Market Access" onClick={() => setView('dex')} />
+              <MenuCard title="Dividends" desc="Infrastructure Performance" onClick={() => setView('dividend')} />
             </div>
           </motion.section>
         )}
 
         {view === 'presale' && (
-          <motion.section key="presale" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="py-32 px-6 max-w-5xl mx-auto">
-             <button onClick={() => setView('menu')} className="mb-12 text-[10px] uppercase tracking-widest text-emerald-600 flex items-center gap-2 font-bold">
+          <motion.section key="presale" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-32 px-6 max-w-5xl mx-auto">
+             <button onClick={() => setView('menu')} className="mb-12 text-[10px] uppercase tracking-widest text-emerald-600 flex items-center gap-2 font-bold bg-white border border-emerald-100 px-6 py-3 rounded-full shadow-sm">
                ← Back to Portal
              </button>
 
-             {/* KOTAK PRESALE YANG DIPERBAIKI */}
-             <div className="bg-white rounded-[4rem] border border-slate-100 shadow-[0_40px_80px_rgba(0,0,0,0.03)] p-10 md:p-20 relative overflow-hidden">
-                <div className="flex flex-col items-center text-center mb-16">
-                    <img src={LOGO_URL} alt="Rothschild Logo" className="w-24 h-24 mb-6" />
-                    <h2 className="text-4xl font-serif uppercase tracking-widest text-slate-900">Official Presale</h2>
-                    <div className="w-12 h-1 bg-emerald-500 mt-4" />
+             <div className="bg-white rounded-[4rem] border border-slate-100 shadow-2xl p-10 md:p-20 text-center">
+                <div className="flex flex-col items-center mb-16">
+                    <img 
+                      src={LOGO_URL} 
+                      className="w-32 h-32 mb-6" 
+                      alt="Logo"
+                      onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/150?text=RTC"; }}
+                    />
+                    <h2 className="text-4xl font-black uppercase tracking-widest text-slate-900">OFFICIAL PRESALE</h2>
+                    <div className="w-20 h-1 bg-emerald-500 mt-4 rounded-full" />
                 </div>
                 
-                <div className="space-y-16">
-                  <HeroSection />
-                  <div className="h-px bg-slate-50" />
+                <div className="space-y-12">
+                  <div className="bg-slate-50 p-10 rounded-[3rem]">
+                    <HeroSection />
+                  </div>
                   <PresaleProgress />
-                  <div className="bg-[#FAFAFA] p-8 md:p-12 rounded-[3rem] border border-slate-50">
+                  <div className="bg-slate-900 p-10 md:p-16 rounded-[4rem] shadow-2xl shadow-emerald-900/20">
                     <InvestmentForm />
                   </div>
                 </div>
              </div>
-             
-             <div className="mt-12">
-               <TokenomicsSection />
-             </div>
+             <TokenomicsSection />
           </motion.section>
         )}
       </AnimatePresence>
@@ -114,12 +138,12 @@ const Index = () => {
 };
 
 const MenuCard = ({ title, desc, onClick }: { title: string; desc: string; onClick: () => void }) => (
-  <button onClick={onClick} className="group p-12 rounded-[4rem] bg-white border border-slate-100 hover:border-emerald-200 transition-all text-left shadow-sm hover:shadow-2xl hover:shadow-emerald-100">
-    <div className="w-10 h-10 rounded-2xl bg-emerald-50 flex items-center justify-center mb-10 group-hover:bg-emerald-500 group-hover:text-white transition-all">
-       <span className="text-xs">→</span>
+  <button onClick={onClick} className="group p-12 rounded-[4rem] bg-white border border-slate-100 hover:border-emerald-200 transition-all text-left shadow-sm hover:shadow-2xl">
+    <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-10 group-hover:bg-emerald-600 group-hover:text-white transition-all">
+       <span className="font-bold">→</span>
     </div>
-    <h3 className="text-2xl font-serif text-slate-900 mb-3 uppercase tracking-wider">{title}</h3>
-    <p className="text-[10px] text-slate-400 uppercase tracking-widest">{desc}</p>
+    <h3 className="text-2xl font-black text-slate-900 mb-3 uppercase tracking-wider">{title}</h3>
+    <p className="text-[10px] text-slate-400 uppercase tracking-widest leading-relaxed">{desc}</p>
   </button>
 );
 
