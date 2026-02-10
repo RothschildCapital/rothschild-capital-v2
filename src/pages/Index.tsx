@@ -38,93 +38,74 @@ const Index = () => {
   }, [connected, view]);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 font-sans selection:bg-emerald-100">
-      {/* Background Decor */}
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-50/20 via-transparent to-transparent pointer-events-none" />
+    <main className="min-h-screen bg-[#050505] text-[#F1F5F9] font-sans selection:bg-emerald-500/30 overflow-x-hidden">
+      {/* Deep Background Decor */}
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-emerald-900/20 via-transparent to-transparent pointer-events-none" />
+      <div className="fixed bottom-0 right-0 w-[500px] h-[500px] bg-emerald-900/10 rounded-full blur-[150px] pointer-events-none" />
 
-      {/* Luxury Navbar */}
-      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 px-6 md:px-12 py-4 flex justify-between items-center">
+      {/* Dark Luxury Navbar */}
+      <nav className="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-xl border-b border-white/5 px-6 md:px-12 py-5 flex justify-between items-center">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => setView('menu')}>
-          <img 
-            src={LOGO_URL} 
-            alt="RTC" 
-            className="w-10 h-10 object-contain drop-shadow-sm"
-            onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/150?text=RTC"; }} 
-          />
-          <span className="font-serif tracking-[0.2em] uppercase text-sm font-black text-slate-900">Rothschild</span>
+          <img src={LOGO_URL} alt="RTC" className="w-9 h-9 object-contain brightness-110" />
+          <span className="font-serif tracking-[0.3em] uppercase text-sm font-bold text-white">Rothschild</span>
         </div>
         <div className="flex items-center gap-4">
           {connected && (
-            <div className="hidden sm:block px-4 py-1.5 bg-emerald-50 border border-emerald-100 rounded-full">
-              <span className="text-[10px] font-bold text-emerald-700 uppercase">
+            <div className="hidden sm:block px-4 py-1.5 bg-emerald-950/40 border border-emerald-500/20 rounded-full">
+              <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-tighter">
                 {rtcBalance.toLocaleString()} $RTC
               </span>
             </div>
           )}
-          <WalletMultiButton className="!bg-slate-900 !rounded-full !text-[9px] !uppercase !tracking-widest !h-10 shadow-lg" />
+          <WalletMultiButton className="!bg-emerald-600 hover:!bg-emerald-500 !rounded-full !text-[9px] !uppercase !tracking-widest !h-10 transition-all shadow-2xl shadow-emerald-900/20" />
         </div>
       </nav>
 
       <AnimatePresence mode="wait">
         {view === 'landing' && (
           <motion.section key="landing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="h-screen flex flex-col items-center justify-center text-center px-6">
-            <div className="mb-10">
-              <img 
-                src={LOGO_URL} 
-                alt="Logo" 
-                className="w-48 h-48 mx-auto drop-shadow-2xl"
-                onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/200?text=Rothschild+Capital"; }}
-              />
-            </div>
-            <h1 className="text-6xl md:text-8xl font-black tracking-[0.2em] uppercase text-slate-900">
-              ROTHSCHILD
-            </h1>
-            <h2 className="text-4xl md:text-6xl font-light tracking-[0.1em] uppercase text-emerald-600 mt-2">
-              CAPITAL
-            </h2>
-            <p className="text-[11px] tracking-[0.5em] uppercase text-slate-500 font-bold mt-8">
-              Sovereign Wealth Infrastructure
-            </p>
-            <div className="mt-16">
-               <WalletMultiButton className="!bg-emerald-600 !px-16 !py-8 !rounded-full !text-[11px] !uppercase !tracking-[0.4em] shadow-2xl shadow-emerald-100 hover:scale-105 transition-transform" />
+            <motion.img 
+              initial={{ scale: 0.9, opacity: 0 }} 
+              animate={{ scale: 1, opacity: 1 }} 
+              src={LOGO_URL} 
+              className="w-48 h-48 mb-12 drop-shadow-[0_0_50px_rgba(16,185,129,0.3)]" 
+            />
+            <h1 className="text-6xl md:text-8xl font-light tracking-[0.4em] uppercase text-white italic">Rothschild</h1>
+            <p className="text-[11px] tracking-[0.6em] uppercase text-emerald-500 font-bold mt-8">Sovereign Wealth Infrastructure</p>
+            <div className="mt-20">
+               <WalletMultiButton className="!bg-transparent !border !border-emerald-500/30 !text-emerald-400 !px-16 !py-7 !rounded-full !text-[11px] !uppercase !tracking-[0.4em] hover:!bg-emerald-500/10 transition-all shadow-2xl" />
             </div>
           </motion.section>
         )}
 
         {view === 'menu' && (
-          <motion.section key="menu" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="min-h-screen flex flex-col items-center justify-center p-6 pt-32">
+          <motion.section key="menu" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="min-h-screen flex flex-col items-center justify-center p-6 pt-32">
             <div className="grid md:grid-cols-3 gap-8 w-full max-w-6xl">
-              <MenuCard title="Equity Presale" desc="Direct Asset Contribution" onClick={() => setView('presale')} />
-              <MenuCard title="DEX Exchange" desc="Secondary Market Access" onClick={() => setView('dex')} />
-              <MenuCard title="Dividends" desc="Infrastructure Performance" onClick={() => setView('dividend')} />
+              <MenuCard title="Equity Presale" desc="Direct Asset Funding" onClick={() => setView('presale')} />
+              <MenuCard title="Exchange" desc="Liquidity Interface" onClick={() => setView('dex')} />
+              <MenuCard title="Dividends" desc="Infrastructure Yield" onClick={() => setView('dividend')} />
             </div>
           </motion.section>
         )}
 
         {view === 'presale' && (
           <motion.section key="presale" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-32 px-6 max-w-5xl mx-auto">
-             <button onClick={() => setView('menu')} className="mb-12 text-[10px] uppercase tracking-widest text-emerald-600 flex items-center gap-2 font-bold bg-white border border-emerald-100 px-6 py-3 rounded-full shadow-sm">
+             <button onClick={() => setView('menu')} className="mb-12 text-[10px] uppercase tracking-widest text-emerald-500 font-bold flex items-center gap-2">
                ← Back to Portal
              </button>
 
-             <div className="bg-white rounded-[4rem] border border-slate-100 shadow-2xl p-10 md:p-20 text-center">
-                <div className="flex flex-col items-center mb-16">
-                    <img 
-                      src={LOGO_URL} 
-                      className="w-32 h-32 mb-6" 
-                      alt="Logo"
-                      onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/150?text=RTC"; }}
-                    />
-                    <h2 className="text-4xl font-black uppercase tracking-widest text-slate-900">OFFICIAL PRESALE</h2>
-                    <div className="w-20 h-1 bg-emerald-500 mt-4 rounded-full" />
+             <div className="bg-[#0A0A0A] rounded-[4rem] border border-white/5 shadow-[0_0_100px_rgba(0,0,0,1)] p-10 md:p-24 relative overflow-hidden text-center">
+                <div className="flex flex-col items-center mb-20">
+                    <img src={LOGO_URL} className="w-24 h-24 mb-6 drop-shadow-xl" alt="Logo" />
+                    <h2 className="text-4xl font-serif uppercase tracking-[0.3em] text-white">Official Presale</h2>
+                    <div className="w-16 h-1 bg-emerald-500 mt-6" />
                 </div>
                 
-                <div className="space-y-12">
-                  <div className="bg-slate-50 p-10 rounded-[3rem]">
-                    <HeroSection />
-                  </div>
+                <div className="space-y-20">
+                  <HeroSection />
+                  <div className="h-px bg-white/5" />
                   <PresaleProgress />
-                  <div className="bg-slate-900 p-10 md:p-16 rounded-[4rem] shadow-2xl shadow-emerald-900/20">
+                  <div className="bg-white/[0.02] p-8 md:p-16 rounded-[3.5rem] border border-white/5 shadow-inner">
                     <InvestmentForm />
                   </div>
                 </div>
@@ -138,12 +119,12 @@ const Index = () => {
 };
 
 const MenuCard = ({ title, desc, onClick }: { title: string; desc: string; onClick: () => void }) => (
-  <button onClick={onClick} className="group p-12 rounded-[4rem] bg-white border border-slate-100 hover:border-emerald-200 transition-all text-left shadow-sm hover:shadow-2xl">
-    <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-10 group-hover:bg-emerald-600 group-hover:text-white transition-all">
-       <span className="font-bold">→</span>
+  <button onClick={onClick} className="group p-12 rounded-[4rem] bg-white/[0.01] border border-white/5 hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-all text-left shadow-2xl">
+    <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-10 group-hover:bg-emerald-500 transition-all">
+       <span className="text-emerald-500 group-hover:text-white">→</span>
     </div>
-    <h3 className="text-2xl font-black text-slate-900 mb-3 uppercase tracking-wider">{title}</h3>
-    <p className="text-[10px] text-slate-400 uppercase tracking-widest leading-relaxed">{desc}</p>
+    <h3 className="text-2xl font-serif text-white/90 mb-3 uppercase tracking-wider">{title}</h3>
+    <p className="text-[10px] text-white/30 uppercase tracking-widest leading-relaxed">{desc}</p>
   </button>
 );
 
