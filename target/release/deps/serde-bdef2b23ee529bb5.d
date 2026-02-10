@@ -1,0 +1,14 @@
+/home/muhammadjefry/rothschild_capital/target/release/deps/serde-bdef2b23ee529bb5.d: /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /home/muhammadjefry/rothschild_capital/target/release/build/serde-bb49da510ea5f8ec/out/private.rs
+
+/home/muhammadjefry/rothschild_capital/target/release/deps/libserde-bdef2b23ee529bb5.rlib: /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /home/muhammadjefry/rothschild_capital/target/release/build/serde-bb49da510ea5f8ec/out/private.rs
+
+/home/muhammadjefry/rothschild_capital/target/release/deps/libserde-bdef2b23ee529bb5.rmeta: /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /home/muhammadjefry/rothschild_capital/target/release/build/serde-bb49da510ea5f8ec/out/private.rs
+
+/home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs:
+/home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs:
+/home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs:
+/home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs:
+/home/muhammadjefry/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs:
+/home/muhammadjefry/rothschild_capital/target/release/build/serde-bb49da510ea5f8ec/out/private.rs:
+
+# env-dep:OUT_DIR=/home/muhammadjefry/rothschild_capital/target/release/build/serde-bb49da510ea5f8ec/out

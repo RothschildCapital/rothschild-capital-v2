@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Rothschild Capital Sales Tracker</title>
+</head>
+<body style="background-color: #000; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+
+    <div id="sales-container" style="background: #111; color: #d4af37; padding: 30px; border-radius: 15px; border: 2px solid #d4af37; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; width: 450px; text-align: center; box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);">
+        <h2 style="margin-top: 0; letter-spacing: 2px;">ROTHSCHILD CAPITAL</h2>
+        <p style="color: #888; font-size: 0.9rem;">Token Sales Monitoring System</p>
+        
+        <div style="background: #222; border-radius: 10px; height: 25px; width: 100%; margin: 20px 0; overflow: hidden; border: 1px solid #444;">
+            <div id="progress-bar" style="background: linear-gradient(90deg, #d4af37, #f9e29c); height: 100%; width: 0%; transition: width 1.5s ease-in-out;"></div>
+        </div>
+
+        <div id="token-status" style="font-size: 1.4rem; font-weight: bold; margin-bottom: 5px;">Menghubungkan ke Blockchain...</div>
+        <div id="percentage-text" style="font-size: 1rem; color: #f9e29c; margin-bottom: 20px;">0% Terjual</div>
+
+        <hr style="border: 0.5px solid #333; margin-bottom: 20px;">
+
+        <h3 style="font-size: 0.9rem; text-align: left; margin-bottom: 10px; color: #fff;">Transaksi Terbaru ($RTC)</h3>
+        <ul id="transaction-list" style="list-style: none; padding: 0; font-size: 0.8rem; text-align: left; max-height: 150px; overflow-y: auto;">
+            <li style="color: #555;">Mencari data transaksi...</li>
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+    <script>
+        async function updateTracker() {
+            const connection = new solanaWeb3.Connection("https://api.devnet.solana.com");
+            const mintAddress = new solanaWeb3.PublicKey("ZPoJxBmpfx9XUgEShitnHnJXSsfR8m5AojNDTcXvudz");
+            const totalSupply = 1000000;
+
+            try {
+                // Ambil sisa supply di pasar
+                const supplyInfo = await connection.getTokenSupply(mintAddress);
+                const currentSupply = supplyInfo.value.uiAmount;
+                
+                // Logika: Token terjual adalah token yang sudah didistribusikan dari mint
+                // Untuk tahap awal, kita asumsikan 1 juta adalah max.
+                const sold = totalSupply - currentSupply; // Sesuai logika burning/distribution
+                const percentage = Math.max(5, (sold / totalSupply) * 100); // Minimal 5% agar bar terlihat
+
+                // Update UI
+                document.getElementById("progress-bar").style.width = percentage + "%";
+                document.getElementById("token-status").innerText = currentSupply.toLocaleString() + " RTC Tersedia";
+                document.getElementById("percentage-text").innerText = (100 - (currentSupply/totalSupply*100)).toFixed(2) + "% Telah Didistribusikan";
+
+                // Ambil History
+                const signatures = await connection.getSignaturesForAddress(mintAddress, { limit: 5 });
+                const list = document.getElementById("transaction-list");
+                list.innerHTML = "";
+
+                signatures.forEach(sig => {
+                    const li = document.createElement("li");
+                    li.style.padding = "8px 0";
+                    li.style.borderBottom = "1px solid #222";
+                    li.innerHTML = `<span style="color:#d4af37">ID:</span> ${sig.signature.substring(0, 12)}... <a href="https://explorer.solana.com/tx/${sig.signature}?cluster=devnet" target="_blank" style="color:#555; text-decoration:none; float:right;">LIHAT</a>`;
+                    list.appendChild(li);
+                });
+
+            } catch (err) {
+                document.getElementById("token-status").innerText = "Gagal Memuat Data";
+                console.error(err);
+            }
+        }
+
+        updateTracker();
+        setInterval(updateTracker, 15000); // Refresh setiap 15 detik
+    </script>
+</body>
+</html>

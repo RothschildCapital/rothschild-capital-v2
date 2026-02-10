@@ -1,0 +1,10 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "public": true,
+  "rewrites": [
+    { "source": "/rtc-master-logo.png", "destination": "/rtc-master-logo.png" },
+    { "source": "/metadata.json", "destination": "/metadata.json" },
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
